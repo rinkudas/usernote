@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an application to create/update/delete a note. User can add a tag to the note also.
 
-Things you may want to cover:
+* Rails version
 
-* Ruby version
+  5.1.5
 
-* System dependencies
+* Database
 
-* Configuration
+  Mongoid
 
-* Database creation
+* Backend
 
-* Database initialization
+  Rails 5 API
 
-* How to run the test suite
+* Frontend
 
-* Services (job queues, cache servers, search engines, etc.)
+  React ( using react-rails gem)
 
-* Deployment instructions
+* Seeding the DB
 
-* ...
+  rake db:seed
+
+* Run the application locally
+
+  rails s -p 3000

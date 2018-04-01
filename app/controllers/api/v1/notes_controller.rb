@@ -2,8 +2,6 @@ module Api::V1
   class NotesController < Api::V1::BaseController
     before_action :set_note, only: [:update, :destroy]
     def index
-      #respond_with Note.all
-      #notes_json = Note.includes(:tags).paginate(page: page).order(sort_by + ' ' + order).all.map{|note| note.as_json_response.merge({tags: note.tags.as_json_response})}
       render json: {
         notes: Note.paginate(page: page).order(sort_by + ' ' + order).all.map{|note| note_json(note)},
         page: page,
@@ -21,27 +19,6 @@ module Api::V1
 
     def update
       @note.update_attributes(note_params)
-
-      # @note.title = note_params[:title]
-      # @note.body = note_params[:body]
-
-      # tags = note_params[:tags_attributes]
-
-      # p tags
-
-      # if tags.present?
-      #   tags.each do |tag|
-      #     if tag["id"].present?
-      #       note_tag = @note.tags.find(tag["id"])
-      #       note_tag.tag_name = tag["tag_name"]
-      #       note_tag.save!
-      #     else
-      #       @note.tags << Tag.new(tag_name: tag["tag_name"])
-      #     end
-      #   end
-      # end
-
-      # result = @note.save
 
 
       respond_with @note, json: note_json(@note).as_json

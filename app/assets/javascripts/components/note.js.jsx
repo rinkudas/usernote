@@ -50,11 +50,13 @@ var Note = React.createClass({
   handleUpdate: function(e) {
     e.preventDefault();
     if (this.validRecord()) {
-      console.log(this.props.note.tags);
+      var tagsAttributes = this.props.note.tags.filter(function( tag ) {
+                          return tag._destroy != true;
+                        })
       var note_data = {
         title: this.recordValue("title"),
         body: this.recordValue("body"),
-        tags_attributes: this.props.note.tags
+        tags_attributes: tagsAttributes
       };
       $.ajax({
         method: 'PUT',
@@ -84,24 +86,6 @@ var Note = React.createClass({
   handleRemoveTag: function(tag) {
     tag._destroy = true;
     this.setState({ note: this.props.note });
-    // var note_data = {
-    //   title: this.recordValue("title"),
-    //   body: this.recordValue("body"),
-    //   tags_attributes: this.props.note.tags
-    // };
-    // $.ajax({
-    //   method: 'PUT',
-    //   url: '/api/v1/notes/' + this.props.note.id,
-    //   data: { note: note_data },
-    //   success: function(data) {
-    //     // this.props.handleUpdateRecord(this.props.note, data);
-    //     // this.setState({ edit: false });
-    //     this.setState({ note: this.props.note });
-    //   }.bind(this),
-    //   error: function(xhr, status, error) {
-    //     alert('Cannot update requested record: ', error);
-    //   }
-    // });
   },
 
   handleAddTag: function() {
